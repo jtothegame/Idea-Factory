@@ -1,0 +1,51 @@
+<%= link_to 'New Idea', new_idea_path, class: "btn btn-primary"%>
+<hr>
+
+<div class = "body container-fluid">
+  <div class = "row">
+    <div class = "blog-section-main col-xs-12 col-sm-12 col-md-12">
+      <div class = 'idea-title'>
+      <h3> <%= link_to @last_idea.title, idea_path(@last_idea) %> </h3>
+      <!-- idea body -->
+      <div class = 'idea-body'>
+        <p> <%= @last_idea.body %> </p>
+      </div>
+      </div>
+      <!-- idea author -->
+      <h5>Author: <%= @last_idea.user.first_name %> <h5>
+      <!-- idea date -->
+      <h5> <%= @last_idea.created_at %> </h5>
+      <div class = "heart">
+        <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+        <span class = "likes"><%= Faker::Number.number(3) %></span>
+    </div>
+  </div>
+
+
+<div class="body container-fluid">
+
+  <% @ideas.each_slice(1) do |group| %>
+    <div class="row">
+      <% group.each do |idea| %>
+
+        <div class = "blog-section col-xs-12 col-sm-12 col-md-12">
+
+          <!-- idea title -->
+          <div class = 'idea-title'>
+          <h3> <%= link_to idea.title, idea_path(idea) %> </h3>
+          <div class = 'idea-body'>
+            <p> <%= idea.body %> </p>
+          </div>
+          </div>
+          <!-- idea body -->
+          <!-- idea author -->
+          <h5>Author: <%= idea.user.first_name %> <h5>
+          <!-- idea date -->
+          <h5> Created At: <%= idea.created_at %> </h5>
+          <div class = "heart">
+            <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+            <span class = "likes"><%= Faker::Number.number(3) %></span>
+
+      <% end %>
+    </div> <hr>
+  <% end %>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IdeaFactory</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Idea Factory
+          <i class="fa fa-lightbulb-o" aria-hidden="true"></i></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-right">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <div style="clear: both;"></div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+
+            <% if user_signed_in? %>
+            <% current_user = User.find_by_id session[:user_id] %>
+            <li><span style="color: white; position: relative; top: 15px;">&nbsp;&nbsp;&nbsp;Hello, <%= current_user.first_name %>!&nbsp;&nbsp;&nbsp; </li></span>
+
+            <li><a href="/sessions" data-method = "delete">Sign Out</a></li>
+            <% else %>
+            <li><a href="/sessions/new">Log In</a></li>
+            <li><a href="/users/new">Sign Up</a></li>
+            <% end %>
+
+          </ul>
+
+
+          <ul class="nav navbar-nav bottom-nav">
+          <li><%= link_to 'New Idea', new_idea_path %></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav><br><br><br>
+
+
+   <% if flash[:notice] %>
+     <div class="flash-notice"><%= flash[:notice] %></div>
+   <% elsif flash[:alert] %>
+     <div class="flash-alert"><%= flash[:alert] %></div>
+   <% end %>
+
+
+   <%= yield %>
+
+<br>
+
+
+  </body>
+</html>

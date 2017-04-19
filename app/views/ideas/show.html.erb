@@ -1,0 +1,45 @@
+<div class='container-fluid'>
+  <h1>Title: <%= @idea.title %></h1>
+  <h4>Contents: </h4><%= @idea.body %></p>
+
+  <h5 class="author"> <strong>Author: </strong><%= @idea.user.first_name %> <h5>
+    <p>Created At: <%= @idea.created_at %></p>
+<br>
+
+|<% if can? :edit, @idea %>
+<%= link_to 'Edit', edit_idea_path(@idea) %>
+<% end %>|
+
+<% if can? :destroy, @idea %>
+<%= link_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>|
+
+<hr>
+
+<h2>Reviews:</h2>
+
+<%= @review.errors.full_messages.join(', ') %>
+<%= form_for [@idea, @review] do |f| %>
+  <div class='form-group'>
+  <%= f.label :Leave_a_Review %>
+  <%= f.text_area :body, class: 'form-control', size: '45%x5%' %>
+  </div>
+  <%= f.submit class: 'btn btn-primary'%>
+<% end %>
+
+<hr>
+
+<% @idea.reviews.each do |review| %>
+
+  <p><strong>User: </strong><%= review.user.first_name %></p>
+  <p><strong>Review: </strong><%= review.body %></p>
+
+  <% if review.user_id == current_user&.id %>
+  <%= link_to(
+    '💣 Delete', idea_review_path(@idea, review), method: :delete,
+    data: {confirm: 'Are you sure?'}
+    ) %>
+
+  <hr>
+  <% end %>
+  <% end %>
