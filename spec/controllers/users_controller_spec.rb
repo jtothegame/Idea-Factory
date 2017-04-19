@@ -33,10 +33,7 @@ RSpec.describe UsersController, type: :controller do
         valid_request
         expect(session[:user_id]).to be
       end
-      it 'sets a flash message' do
-        valid_request
-        expect(flash[:notice]).to be
-      end
+
     end
 
     context 'invalid parameters' do
@@ -54,11 +51,6 @@ RSpec.describe UsersController, type: :controller do
         invalid_request
         expect(response).to render_template(:new)
       end
-      it 'sets a flash message' do
-        invalid_request
-        expect(flash[:alert]).to be
-      end
     end
   end
-
 end

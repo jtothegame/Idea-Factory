@@ -32,11 +32,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'full_name method' do
-    it 'returns the first_name and last_name concatenated and titleized' do
-      user = User.new(valid_attributes({first_name: 'bob'}))
-      expect(user.full_name).to eq("Bob Saget")
-    end
-
     it 'returns the first_name only if the first_name is given' do
       #
     end
