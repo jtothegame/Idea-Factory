@@ -42,8 +42,8 @@
             </strong><%= review.user.first_name %></p>
         <p>
             <strong>Review:
-            </strong><%= review.body %></p>
-            <hr>
+            </strong><%= review.body %></p><br>
+
 
         <% if review.user_id == current_user&.id %>
         <%= link_to(
